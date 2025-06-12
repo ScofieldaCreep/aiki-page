@@ -1,0 +1,34 @@
+{
+  "name": "ai-dailycard-website",
+  "version": "1.0.0",
+  "description": "AI DailyCard - Smart Flashcards for Efficient Learning",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build process needed'",
+    "start": "npx serve .",
+    "preview": "npx serve ."
+  },
+  "keywords": [
+    "ai",
+    "flashcards",
+    "learning",
+    "education",
+    "spaced-repetition",
+    "mobile-app",
+    "ios"
+  ],
+  "author": "AI DailyCard Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ai-dailycard-website.git"
+  },
+  "homepage": "https://aidailycard.com"
+}
