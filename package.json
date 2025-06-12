@@ -1,7 +1,7 @@
 {
-  "name": "ai-dailycard-website",
+  "name": "aiki-website",
   "version": "1.0.0",
-  "description": "AI DailyCard - Smart Flashcards for Efficient Learning",
+  "description": "Aiki - AI-Powered Smart Flashcards for Efficient Learning",
   "main": "index.html",
   "scripts": {
     "dev": "npx serve .",
@@ -10,6 +10,7 @@
     "preview": "npx serve ."
   },
   "keywords": [
+    "aiki",
     "ai",
     "flashcards",
     "learning",
@@ -18,7 +19,7 @@
     "mobile-app",
     "ios"
   ],
-  "author": "AI DailyCard Team",
+  "author": "Aiki Team",
   "license": "MIT",
   "devDependencies": {
     "serve": "^14.2.1"
@@ -28,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/ai-dailycard-website.git"
+    "url": "https://github.com/your-username/aiki-website.git"
   },
-  "homepage": "https://aidailycard.com"
+  "homepage": "https://aiki.app"
 }
