@@ -3,8 +3,18 @@
   "name": "aiki-website",
   "builds": [
     {
-      "src": "**/*",
+      "src": "*.html",
       "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy.html"
     }
   ],
   "headers": [
@@ -35,7 +45,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js))",
+      "source": "/(.*).(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
