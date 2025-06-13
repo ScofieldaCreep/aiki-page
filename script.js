@@ -192,3 +192,237 @@ function debounce(func, wait, immediate) {
 const optimizedScrollHandler = debounce(function () {
   // Scroll-based animations or effects can go here
 }, 10);
+
+// Contact Modal Functions
+function openContactModal() {
+  const modal = document.getElementById("contactModal");
+  if (modal) {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+
+    // Focus on first input for better UX
+    setTimeout(() => {
+      const firstInput = modal.querySelector('input[type="text"]');
+      if (firstInput) firstInput.focus();
+    }, 100);
+  }
+}
+
+function closeContactModal() {
+  const modal = document.getElementById("contactModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto"; // Restore scroll
+
+    // Clear any messages
+    const existingMessage = modal.querySelector(".form-message");
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+  }
+}
+
+// Close modal when clicking outside
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("contactModal");
+  if (event.target === modal) {
+    closeContactModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeContactModal();
+  }
+});
+
+// Contact Form Submission
+document.addEventListener("DOMContentLoaded", function () {
+  const contactForm = document.getElementById("contactForm");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get form data
+      const formData = new FormData(contactForm);
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        subject: formData.get("subject"),
+        message: formData.get("message"),
+      };
+
+      // Validate form
+      if (!validateContactForm(data)) {
+        return;
+      }
+
+      // Submit form
+      submitContactForm(data);
+    });
+  }
+});
+
+function validateContactForm(data) {
+  // Remove existing error messages
+  const existingMessage = document.querySelector(".form-message");
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+
+  // Basic validation
+  if (!data.name.trim()) {
+    showFormMessage("Please enter your name.", "error");
+    return false;
+  }
+
+  if (!data.email.trim() || !isValidEmail(data.email)) {
+    showFormMessage("Please enter a valid email address.", "error");
+    return false;
+  }
+
+  if (!data.subject) {
+    showFormMessage("Please select a subject.", "error");
+    return false;
+  }
+
+  if (!data.message.trim() || data.message.trim().length < 10) {
+    showFormMessage(
+      "Please enter a message with at least 10 characters.",
+      "error"
+    );
+    return false;
+  }
+
+  return true;
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function showFormMessage(message, type) {
+  const form = document.getElementById("contactForm");
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `form-message ${type}`;
+  messageDiv.textContent = message;
+
+  // Insert at the beginning of the form
+  form.insertBefore(messageDiv, form.firstChild);
+
+  // Auto-remove after 5 seconds for success messages
+  if (type === "success") {
+    setTimeout(() => {
+      if (messageDiv.parentNode) {
+        messageDiv.remove();
+      }
+    }, 5000);
+  }
+}
+
+function submitContactForm(data) {
+  const submitButton = document.querySelector(".btn-submit");
+  const originalText = submitButton.textContent;
+
+  // Disable button and show loading
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending...";
+
+  // Create mailto link with form data
+  const subject = encodeURIComponent(`Aiki Support: ${data.subject}`);
+  const body = encodeURIComponent(
+    `Name: ${data.name}\n` +
+      `Email: ${data.email}\n` +
+      `Subject: ${data.subject}\n\n` +
+      `Message:\n${data.message}\n\n` +
+      `---\n` +
+      `Sent from Aiki website contact form`
+  );
+
+  // Open email client
+  const mailtoLink = `mailto:chizhang2048@gmail.com?subject=${subject}&body=${body}`;
+
+  try {
+    // Try to open email client
+    window.location.href = mailtoLink;
+
+    // Show success message
+    setTimeout(() => {
+      showFormMessage(
+        "Your email client should open now. If it doesn't, please send an email to chizhang2048@gmail.com with your message.",
+        "success"
+      );
+
+      // Reset form
+      document.getElementById("contactForm").reset();
+
+      // Re-enable button
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+
+      // Close modal after a delay
+      setTimeout(() => {
+        closeContactModal();
+      }, 3000);
+    }, 500);
+  } catch (error) {
+    // Fallback: show error and direct email instructions
+    showFormMessage(
+      "Unable to open email client. Please send your message directly to chizhang2048@gmail.com",
+      "error"
+    );
+
+    // Re-enable button
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+}
+
+// Enhanced email button tracking
+document.addEventListener("DOMContentLoaded", function () {
+  const emailButtons = document.querySelectorAll(
+    ".email-button, .support-link"
+  );
+
+  emailButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      // Track email button clicks
+      trackEvent("Support", "Email Click", "Direct Email");
+    });
+  });
+
+  const contactFormButton = document.querySelector(".contact-form-button");
+  if (contactFormButton) {
+    contactFormButton.addEventListener("click", function () {
+      // Track contact form modal opens
+      trackEvent("Support", "Contact Form Open", "Modal");
+    });
+  }
+});
+
+// Add smooth scrolling to contact section
+document.addEventListener("DOMContentLoaded", function () {
+  const contactLinks = document.querySelectorAll('a[href="#contact"]');
+
+  contactLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const headerOffset = 80;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+});

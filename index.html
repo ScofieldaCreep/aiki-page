@@ -26,6 +26,7 @@
         <div class="nav-links">
           <a href="#features">Features</a>
           <a href="#screenshots">Screenshots</a>
+          <a href="#contact" class="support-link">💬 Support</a>
           <a href="#download" class="cta-button">Download</a>
         </div>
       </nav>
@@ -47,6 +48,7 @@
           <div class="hero-buttons">
             <a href="#download" class="btn-primary"> 📱 Download for iOS </a>
             <a href="#features" class="btn-secondary"> Learn More </a>
+            <a href="#contact" class="btn-support"> 💬 Get Support </a>
           </div>
           <div class="hero-badges">
             <span class="badge">🤖 AI-Powered</span>
@@ -230,6 +232,121 @@
         </div>
       </div>
     </section>
+
+    <!-- Contact/Support Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact-content">
+          <h2 class="section-title">Need Help? Contact Us</h2>
+          <p class="contact-subtitle">
+            We're here to help! Send us a message and we'll get back to you as
+            soon as possible.
+          </p>
+
+          <div class="contact-options">
+            <div class="quick-contact">
+              <h3>Quick Contact</h3>
+              <div class="contact-buttons">
+                <a
+                  href="mailto:chizhang2048@gmail.com?subject=Aiki%20Support%20Request"
+                  class="email-button"
+                >
+                  📧 Email Support
+                </a>
+                <button
+                  class="contact-form-button"
+                  onclick="openContactModal()"
+                >
+                  📝 Send Message
+                </button>
+              </div>
+            </div>
+
+            <div class="support-info">
+              <h3>Support Information</h3>
+              <div class="support-details">
+                <div class="support-item">
+                  <span class="support-icon">⏰</span>
+                  <div>
+                    <strong>Response Time</strong>
+                    <p>Usually within 24 hours</p>
+                  </div>
+                </div>
+                <div class="support-item">
+                  <span class="support-icon">💬</span>
+                  <div>
+                    <strong>Support Types</strong>
+                    <p>Technical issues, feature requests, feedback</p>
+                  </div>
+                </div>
+                <div class="support-item">
+                  <span class="support-icon">📱</span>
+                  <div>
+                    <strong>App Support</strong>
+                    <p>iOS app troubleshooting and guidance</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Send us a message</h3>
+          <span class="close" onclick="closeContactModal()">&times;</span>
+        </div>
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a topic</option>
+              <option value="technical-issue">Technical Issue</option>
+              <option value="feature-request">Feature Request</option>
+              <option value="feedback">Feedback</option>
+              <option value="account-help">Account Help</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              placeholder="Please describe your question or issue in detail..."
+            ></textarea>
+          </div>
+
+          <div class="form-buttons">
+            <button
+              type="button"
+              onclick="closeContactModal()"
+              class="btn-cancel"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
